@@ -21,7 +21,15 @@ public class FishMovement: MonoBehaviour
         if (!running) {
             StartCoroutine(ChangeDirection());
         }
-        Move();
+        //Flip the fish when it changes direction.
+        if (xMult < 0)
+        {
+            GetComponent<SpriteRenderer>().flipX = true;
+        }
+        else if (xMult > 0) { 
+            GetComponent <SpriteRenderer>().flipX = false;
+        }
+            Move();
         
     }
 
@@ -33,8 +41,9 @@ public class FishMovement: MonoBehaviour
     
     IEnumerator ChangeDirection() 
     {
+        //change direction every 5 seconds.
         running = true;
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(5);
         xMult = Random.Range(-1f, 1f);
         yMult = Random.Range(-1f, 1f);
         running = false;
